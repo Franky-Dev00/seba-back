@@ -46,3 +46,4 @@ def delete_student(student_id):
     db.session.delete(student)
     db.session.commit()
     return jsonify({"message": "Estudiante eliminado"})
+
