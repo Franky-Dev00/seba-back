@@ -5,9 +5,24 @@ from routes.teachers import teachers_bp
 from routes.courses import courses_bp
 from routes.enrollments import enrollments_bp
 from routes.grades import grades_bp
+from flask_cors import CORS              # Importa la extensión CORS para permitir peticiones desde diferentes dominios (Cross-Origin Resource Sharing)
 
 # Crear la app
 app = Flask(__name__)
+
+app.url_map.strict_slashes = False
+
+CORS(
+    app,
+    resources={
+        r"/*": {
+            "origins": ["http://localhost:3000"],
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"],
+        },
+    },
+    supports_credentials=True,
+)
 
 # Config DB (puedes dejar tu URL aquí o usar variables de entorno)
 DATABASE_URL = 'postgresql://seba:CMG3_seba#@44.199.207.193:5432/seba'
